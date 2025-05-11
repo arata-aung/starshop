@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block body %}
+    <h1>Homepage</h1>
+    <h1>Welcome to the homepage!</h1>
+    <p>This is the main content area.</p>
+    {{ shipcount }}
+    
+    {% if shipcount > 3 %}
+        {{ starship.name|upper }}
+
+    {% endif %}
+
+{% endblock %}
+
+{% block footer %}
+    <footer>
+        <p>&copy; 2025 My Website</p>
+    </footer>
+{% endblock %}
