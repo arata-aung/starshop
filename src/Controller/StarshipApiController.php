@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Model\Starship;
 // use App\Repository\StarshipRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 // use Symfony\Component\HttpFoundation\JsonResponse;
@@ -10,35 +9,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 // use Symfony\Component\HttpFoundation\Request;
 // use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use App\Repository\StarshipRepository;
 
 class StarshipApiController extends AbstractController
 {
     #[Route('/api/starships')]
-    public function getCollection(): Response
+    public function getCollection(StarshipRepository $repository): Response
     {
-        $starship = [
-            new Starship(
-                id: 1,
-                name: 'USS Enterprise',
-                class: 'NCC-1701-D',
-                captain: 'Jean-Luc Picard',
-                crew: 1012
-            ),
-            new Starship(
-                id: 2,
-                name: 'USS Voyager',
-                class: 'NCC-74656',
-                captain: 'Kathryn Janeway',
-                crew: 150
-            ),
-            new Starship(
-                id: 3,
-                name: 'USS Defiant',
-                class: 'NX-74205',
-                captain: 'Benjamin Sisko',
-                crew: 50
-            ),
-        ];
+        // dd($repository);
+        $starship = $repository->findAll();
+
+        return $this->json($starship);
+    }
+
+    #[Route('/api/starships/{id<\d+>}', methods: ['GET'])]
+    public function getItem(StarshipRepository $repository, int $id): Response
+    {
+        $starship = $repository->find($id);
+
+        if (!$starship) {
+            return $this->json(['error' => 'Starship not found'], Response::HTTP_NOT_FOUND);
+        }
 
         return $this->json($starship);
     }

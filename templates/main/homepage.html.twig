@@ -3,13 +3,18 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
-    <h1>Homepage</h1>
+    <h1 class="text-4xl text-wrap">Homepage</h1>
     <h1>Welcome to the homepage!</h1>
     <p>This is the main content area.</p>
     {{ shipcount }}
     
-    {% if shipcount > 3 %}
+    {% if shipcount > 1 %}
+
+    <img src="{{ asset('images/photo.jpg') }}" alt="test">
         {{ starship.name|upper }}
+        {{ starship.class }}
+        {{ starship.captain }}
+        {{ starship.crew }}
 
     {% endif %}
 
