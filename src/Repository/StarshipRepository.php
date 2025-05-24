@@ -3,6 +3,7 @@
 namespace App\Repository;
 use Psr\Log\LoggerInterface;
 use App\Model\Starship;
+use App\Model\StarshipStatusEnum;
 
 class StarshipRepository
 {
@@ -25,21 +26,24 @@ class StarshipRepository
                 name: 'USS Enterprise',
                 class: 'NCC-1701-D',
                 captain: 'Jean-Luc Picard',
-                crew: 1012
+                crew: 1012,
+                status: StarshipStatusEnum::WAITING
             ),
             new Starship(
                 id: 2,
                 name: 'USS Voyager',
                 class: 'NCC-74656',
                 captain: 'Kathryn Janeway',
-                crew: 150
+                crew: 150,
+                status: StarshipStatusEnum::IN_PROGRESS
             ),
             new Starship(
                 id: 3,
                 name: 'USS Defiant',
                 class: 'NX-74205',
                 captain: 'Benjamin Sisko',
-                crew: 50
+                crew: 50,
+                status: StarshipStatusEnum::COMPLETED
             ),
         ];
 
